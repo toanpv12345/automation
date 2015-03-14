@@ -1,0 +1,12 @@
+_init: CODE, 1516 0 15
+_io_config: CODE, 1531 0 12
+_main: CODE, 1490 0 26
+_output: CODE, 1828 0 118
+_control_relay: CODE, 1696 0 132
+__initialization: CODE, 1481 0 5
+___lldiv: CODE, 1624 0 72
+_reset_74ls573: CODE, 1543 0 6
+_uart_open: CODE, 1549 0 75
+_all_relay: CODE, 1946 0 44
+_chip_select: CODE, 1990 0 58
+Total: 563
