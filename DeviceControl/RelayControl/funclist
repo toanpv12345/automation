@@ -1,0 +1,9 @@
+_uart_write_frame: CODE, 1430 0 20
+_EEPROM_read: CODE, 1417 0 13
+_EEPROM_write: CODE, 1450 0 38
+_main: CODE, 1668 0 370
+__initialization: CODE, 2038 0 6
+___lldiv: CODE, 1574 0 94
+_uart_write_byte: CODE, 1407 0 10
+_uart_open: CODE, 1488 0 86
+Total: 637
