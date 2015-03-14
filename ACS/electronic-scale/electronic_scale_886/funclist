@@ -1,0 +1,11 @@
+_display: CODE, 1608 0 149
+_disable_uart: CODE, 1264 0 22
+_delay_us: CODE, 1286 0 31
+_main: CODE, 1757 0 291
+_timer_init: CODE, 1228 0 7
+__initialization: CODE, 1380 0 29
+_write_frame: CODE, 1348 0 32
+___lldiv: CODE, 1499 0 109
+_delay_ms: CODE, 1317 0 31
+_open_uart: CODE, 1413 0 86
+Total: 787

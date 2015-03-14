@@ -1,0 +1,6 @@
+_main: CODE, 1785 0 263
+_timer_init: CODE, 1746 0 5
+__initialization: CODE, 1742 0 0
+_delay_ms: CODE, 1767 0 18
+_PinConfig: CODE, 1751 0 16
+Total: 302
