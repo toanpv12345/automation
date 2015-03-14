@@ -1,0 +1,12 @@
+_display: CODE, 1231 0 116
+_EEPROM_getc: CODE, 493 0 9
+_EEPROM_putc: CODE, 518 0 30
+_delay_us: CODE, 2027 0 21
+_main: CODE, 726 0 505
+__initialization: CODE, 548 0 30
+_write_frame: CODE, 502 0 16
+___lldiv: CODE, 654 0 72
+_keypad_get: CODE, 1347 0 680
+_keypad_init: CODE, 487 0 6
+_open_uart: CODE, 582 0 72
+Total: 1557

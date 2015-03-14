@@ -1,0 +1,8 @@
+_delay_us: CODE, 1558 0 28
+_main: CODE, 1883 0 165
+__initialization: CODE, 1521 0 14
+_write_frame: CODE, 1586 0 30
+___lldiv: CODE, 1774 0 109
+_delay_ms: CODE, 1616 0 35
+_open_uart: CODE, 1688 0 86
+Total: 467

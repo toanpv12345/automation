@@ -1,0 +1,11 @@
+_display: CODE, 1556 0 68
+_EEPROM_getc: CODE, 1444 0 9
+_EEPROM_putc: CODE, 1469 0 30
+_delay_us: CODE, 1624 0 20
+_main: CODE, 1788 0 260
+__initialization: CODE, 1499 0 28
+_write_frame: CODE, 1453 0 16
+___lldiv: CODE, 1716 0 72
+_delay_ms: CODE, 1531 0 25
+_open_uart: CODE, 1644 0 72
+Total: 600
