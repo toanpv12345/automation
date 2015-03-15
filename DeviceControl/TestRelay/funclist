@@ -1,9 +1,9 @@
 ___aldiv: CODE, 1901 0 143
-_timer1_is_timeout: CODE, 1535 0 6
-_main: CODE, 1667 0 109
+_timer1_is_timeout: CODE, 1539 0 6
+_main: CODE, 1671 0 105
 _timer1_start_ms: CODE, 1776 0 125
-___lmul: CODE, 1604 0 63
+___lmul: CODE, 1608 0 63
 __initialization: CODE, 2044 0 0
-_timer1_init: CODE, 1541 0 28
-_timer1_start: CODE, 1569 0 35
-Total: 509
+_timer1_init: CODE, 1545 0 28
+_timer1_start: CODE, 1573 0 35
+Total: 505

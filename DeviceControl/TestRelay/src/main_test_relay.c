@@ -73,10 +73,10 @@ void main(int argc, char** argv)
     LDR_TRIS = 1;
 
     RELAY1_TRIS = 0;
-    RELAY1 = 0; // tat den
+    RELAY1 = 1; // bat den
 
-    RELAY2_TRIS = 0;
-    RELAY2 = 0; // tat den
+    LED1 = 0;
+    LED2 = 0;
 
     timer1_init(T1_DIV_8, false);
     timer1_start_ms(TIME_DELAY);
@@ -93,12 +93,12 @@ void main(int argc, char** argv)
         {
             if(is_relay1_on == true)
             {
-                RELAY1 = 0;
+                LED1 = 0;
                 is_relay1_on = false;
             }
             else
             {
-                RELAY1 = 1;
+                LED1 = 1;
                 is_relay1_on = true;
             }
         }
@@ -110,12 +110,12 @@ void main(int argc, char** argv)
             
             if(is_relay2_on == true)
             {
-                RELAY2 = 0;
+                LED2 = 0;
                 is_relay2_on = false;
             }
             else
             {
-                RELAY2 = 1;
+                LED2 = 1;
                 is_relay2_on = true;
             }
         }
