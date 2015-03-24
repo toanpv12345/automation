@@ -1,10 +1,10 @@
-___aldiv: CODE, 1737 0 143
-_timer1_is_timeout: CODE, 1480 0 6
-_main: CODE, 1880 0 164
-_timer1_start_ms: CODE, 1612 0 125
-___lmul: CODE, 1549 0 63
+___aldiv: CODE, 1735 0 143
+_timer1_is_timeout: CODE, 1478 0 6
+_main: CODE, 1878 0 166
+_timer1_start_ms: CODE, 1610 0 125
+___lmul: CODE, 1547 0 63
 __initialization: CODE, 2044 0 0
-_timer1_init: CODE, 1486 0 28
-_timer1_stop: CODE, 1475 0 5
-_timer1_start: CODE, 1514 0 35
-Total: 569
+_timer1_init: CODE, 1484 0 28
+_timer1_stop: CODE, 1473 0 5
+_timer1_start: CODE, 1512 0 35
+Total: 571

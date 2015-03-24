@@ -70,6 +70,8 @@ void main(int argc, char** argv)
     RELAY_TRIS = 0;
 
     RELAY = 0; // tat den
+    LED1 = 0;
+    LED2 = 0;
 
     timer1_init(T1_DIV_8, false);
 
@@ -81,7 +83,6 @@ void main(int argc, char** argv)
             delay_ms(300);
             is_start = true;
             RELAY = 1; // bat den
-            LED1 = 1;
             timer1_start_ms(TIME_DELAY);
         }
 
@@ -99,17 +100,13 @@ void main(int argc, char** argv)
                 timer1_stop();
                 if(SENSOR2 == 1) // khong co nguoi, tat den
                 {
-                    LED2 = 0;
-
                     RELAY = 0;
-                    LED1 = 0;
                     is_start = false;
                 }
                 else
                 {
                     delay_ms(300);
                     timer1_start_ms(TIME_DELAY);
-                    LED2 = 1;
                 }
             }
             else
@@ -120,7 +117,6 @@ void main(int argc, char** argv)
                     time_out = 0;
                     timer1_stop();
                     timer1_start_ms(TIME_DELAY);
-                    LED2 = 1;
                 }
             }
         }
