@@ -138,7 +138,7 @@ void main(int argc, char** argv)
                             else if(buffer[DATA] == 7)
                                 RELAY8 = 1;
 
-                            uart_write_frame(buffer, BUFFER_LENGTH);
+                            //uart_write_frame(buffer, BUFFER_LENGTH);
                         }
                     }
                     else if(buffer[CMD] == CMD_RELAY_OFF)
@@ -162,7 +162,7 @@ void main(int argc, char** argv)
                             else if(buffer[DATA] == 7)
                                 RELAY8 = 0;
 
-                            uart_write_frame(buffer, BUFFER_LENGTH);
+                            //uart_write_frame(buffer, BUFFER_LENGTH);
                         }
                     }
                     else if(buffer[CMD] == CMD_ALL_RELAY_OFF)
@@ -170,7 +170,7 @@ void main(int argc, char** argv)
                         if(buffer[DEVICE_ID] == EEPROM_read(ID_ADDR))
                         {
                             RELAY_DATA = 0x00;
-                            uart_write_frame(buffer, BUFFER_LENGTH);
+                            //uart_write_frame(buffer, BUFFER_LENGTH);
                         }
                     }
                     else if(buffer[CMD] == CMD_ALL_RELAY_ON)
@@ -179,7 +179,7 @@ void main(int argc, char** argv)
                         {
                             RELAY_DATA = 0xFF;
 
-                            uart_write_frame(buffer, BUFFER_LENGTH);
+                            //uart_write_frame(buffer, BUFFER_LENGTH);
                         }
                     }
                     else if(buffer[CMD] == CMD_GET_ID)
