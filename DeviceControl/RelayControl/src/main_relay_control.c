@@ -83,7 +83,7 @@ uint8_t EEPROM_read(uint8_t address);
 void main(int argc, char** argv)
 {
     uint8_t count = 0;
-    uint8_t buffer[BUFFER_LENGTH] = {0};
+    uint8_t buffer[BUFFER_LENGTH] = {1, 2, 3, 4, 5, 6};
     uint8_t crc = 0;
 
     ANSEL = 0x00;
@@ -98,6 +98,9 @@ void main(int argc, char** argv)
     
     while(1)
     {
+       // EN = 1;
+        //uart_write_frame(buffer, BUFFER_LENGTH);
+        //delay_ms(1000);
         EN = 0; // cho phep RS485 nhan du lieu
         if(RX_READY())
         {

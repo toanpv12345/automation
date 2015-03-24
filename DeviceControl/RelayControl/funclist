@@ -1,9 +1,9 @@
-_uart_write_frame: CODE, 1476 0 20
-_EEPROM_read: CODE, 1463 0 13
-_EEPROM_write: CODE, 1496 0 38
-_main: CODE, 1714 0 324
-__initialization: CODE, 2038 0 6
-___lldiv: CODE, 1620 0 94
-_uart_write_byte: CODE, 1453 0 10
-_uart_open: CODE, 1534 0 86
-Total: 591
+_uart_write_frame: CODE, 1446 0 20
+_EEPROM_read: CODE, 1433 0 13
+_EEPROM_write: CODE, 1466 0 38
+_main: CODE, 1684 0 324
+__initialization: CODE, 2008 0 36
+___lldiv: CODE, 1590 0 94
+_uart_write_byte: CODE, 1423 0 10
+_uart_open: CODE, 1504 0 86
+Total: 621
