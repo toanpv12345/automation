@@ -11,7 +11,7 @@
 #include "SerialCtrl.h"
 
 enum CommandType {
-	RELAY_ON,
+	RELAY_ON = 48,
 	RELAY_OFF,
 	GET_ID,
 	SET_ID,
@@ -86,6 +86,7 @@ private:
 	bool m_isRelay7On;
 	bool m_isRelay8On;
 
+	std::string m_data;
 
 public:
 	afx_msg void OnBnClickedButtonRelay1();
@@ -105,6 +106,8 @@ private:
 	int m_nCurrentID;
 
 	CommandType m_commandType;
+public:
+	afx_msg void OnBnClickedBtCloseport();
 };
 
 #ifndef _DEBUG 
