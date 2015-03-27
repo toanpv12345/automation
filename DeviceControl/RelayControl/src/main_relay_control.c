@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   main.c
  * Author: Toanpv
  *
@@ -67,24 +67,23 @@
 #define CRC_ERROR       95
 
 // Cmd code
-#define CMD_RELAY_ON        0
-#define CMD_RELAY_OFF       1
-#define CMD_GET_ID          2
-#define CMD_SET_ID          3
-#define CMD_ALL_RELAY_ON    4
-#define CMD_ALL_RELAY_OFF   5
+#define CMD_RELAY_ON        0x30
+#define CMD_RELAY_OFF       0x31
+#define CMD_GET_ID          0x32
+#define CMD_SET_ID          0x33
+#define CMD_ALL_RELAY_ON    0x34
+#define CMD_ALL_RELAY_OFF   0x35
 
 // ID address
 #define ID_ADDR     0x03
 
 void EEPROM_write(uint8_t address, uint8_t data);
 uint8_t EEPROM_read(uint8_t address);
-void create_cmd(uint8_t device_id, uint8_t cmd_type, uint8_t data);
 
 void main(int argc, char** argv)
 {
     uint8_t count = 0;
-    uint8_t buffer[BUFFER_LENGTH] = {0, 0, 0, 0, 0, 0};
+    uint8_t buffer[BUFFER_LENGTH] = {0};
     uint8_t crc = 0;
     uint8_t device_id = EEPROM_read(ID_ADDR);
 
@@ -95,17 +94,14 @@ void main(int argc, char** argv)
     EN_TRIS = 0;
     RELAY_TRIS = 0;
     RELAY_DATA = 0;
-    TEST2_TRIS = 0;
 
     uart_open(9600);
-    delay_ms(100);
-    
+
     while(1)
     {
         EN = 0; // cho phep RS485 nhan du lieu
         if(RX_READY())
         {
-            TEST1 = 1;
             buffer[count] = RX_DATA;
             count++;
             if(buffer[START] != 0xA0)
@@ -116,8 +112,7 @@ void main(int argc, char** argv)
         {
             count = 0;
             EN = 1; // khong cho RS485 nhan du lieu
-            uart_disable(true);
-            
+
             if((buffer[START] == 0xA0) && (buffer[END] == 0xB0))
             {
                 crc = buffer[START] | buffer[CMD] | buffer[DEVICE_ID] | buffer[DATA];
@@ -127,25 +122,23 @@ void main(int argc, char** argv)
                     {
                         if(buffer[DEVICE_ID] == device_id)
                         {
-                            if(buffer[DATA] == 0)
+                            if(buffer[DATA] == 0x30)
                                 RELAY1 = 1;
-                            else if(buffer[DATA] == 1)
+                            else if(buffer[DATA] == 0x31)
                                 RELAY2 = 1;
-                            else if(buffer[DATA] == 2)
+                            else if(buffer[DATA] == 0x32)
                                 RELAY3 = 1;
-                            else if(buffer[DATA] == 3)
+                            else if(buffer[DATA] == 0x33)
                                 RELAY4 = 1;
-                            else if(buffer[DATA] == 4)
+                            else if(buffer[DATA] == 0x34)
                                 RELAY5 = 1;
-                            else if(buffer[DATA] == 5)
+                            else if(buffer[DATA] == 0x35)
                                 RELAY6 = 1;
-                            else if(buffer[DATA] == 6)
+                            else if(buffer[DATA] == 0x36)
                                 RELAY7 = 1;
-                            else if(buffer[DATA] == 7)
+                            else if(buffer[DATA] == 0x37)
                                 RELAY8 = 1;
 
-                            uart_disable(false);
-                            delay_ms(100);
                             uart_write_frame(buffer, BUFFER_LENGTH);
                         }
                     }
@@ -153,25 +146,23 @@ void main(int argc, char** argv)
                     {
                         if(buffer[DEVICE_ID] == device_id)
                         {
-                            if(buffer[DATA] == 0)
+                            if(buffer[DATA] == 0x30)
                                 RELAY1 = 0;
-                            else if(buffer[DATA] == 1)
+                            else if(buffer[DATA] == 0x31)
                                 RELAY2 = 0;
-                            else if(buffer[DATA] == 2)
+                            else if(buffer[DATA] == 0x32)
                                 RELAY3 = 0;
-                            else if(buffer[DATA] == 3)
+                            else if(buffer[DATA] == 0x33)
                                 RELAY4 = 0;
-                            else if(buffer[DATA] == 4)
+                            else if(buffer[DATA] == 0x34)
                                 RELAY5 = 0;
-                            else if(buffer[DATA] == 5)
+                            else if(buffer[DATA] == 0x35)
                                 RELAY6 = 0;
-                            else if(buffer[DATA] == 6)
+                            else if(buffer[DATA] == 0x36)
                                 RELAY7 = 0;
-                            else if(buffer[DATA] == 7)
+                            else if(buffer[DATA] == 0x37)
                                 RELAY8 = 0;
 
-                            uart_disable(false);
-                            delay_ms(100);
                             uart_write_frame(buffer, BUFFER_LENGTH);
                         }
                     }
@@ -180,8 +171,6 @@ void main(int argc, char** argv)
                         if(buffer[DEVICE_ID] == device_id)
                         {
                             RELAY_DATA = 0x00;
-                            uart_disable(false);
-                            delay_ms(100);
                             uart_write_frame(buffer, BUFFER_LENGTH);
                         }
                     }
@@ -190,9 +179,6 @@ void main(int argc, char** argv)
                         if(buffer[DEVICE_ID] == device_id)
                         {
                             RELAY_DATA = 0xFF;
-                            
-                            uart_disable(false);
-                            delay_ms(100);
                             uart_write_frame(buffer, BUFFER_LENGTH);
                         }
                     }
@@ -201,42 +187,19 @@ void main(int argc, char** argv)
                         device_id = EEPROM_read(ID_ADDR);
                         buffer[DEVICE_ID] = device_id;
                         buffer[DATA] = device_id;
-                        
-                        uart_disable(false);
-                        delay_ms(100);
                         uart_write_frame(buffer, BUFFER_LENGTH);
                     }
                     else if(buffer[CMD] == CMD_SET_ID)
                     {
                         EEPROM_write(ID_ADDR, buffer[DATA]);
-                        delay_ms(100);
-                        
-                        device_id = EEPROM_read(ID_ADDR);
-                        uart_disable(false);
-                        delay_ms(100);
+                        device_id = buffer[DATA];
+                        buffer[DEVICE_ID] = device_id;
                         uart_write_frame(buffer, BUFFER_LENGTH);
                     }
                 }
             }
         }
     }
-}
-
-void create_cmd(uint8_t device_id, uint8_t cmd_type, uint8_t data)
-{
-    uint8_t cmd[BUFFER_LENGTH] = {0};
-    delay_ms(100);
-    
-    cmd[0] = 0xA0;
-    cmd[1] = device_id;
-    cmd[2] = cmd_type;
-    cmd[3] = data;
-    cmd[4] = 0xA0 | device_id | cmd_type | data;;
-    cmd[5] = 0xB0;
-
-    EN = 1;
-    uart_disable(false);
-    uart_write_frame(cmd, BUFFER_LENGTH);
 }
 
 void EEPROM_write(uint8_t address, uint8_t data)
