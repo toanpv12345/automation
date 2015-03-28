@@ -2,11 +2,12 @@
 
 void uart_open(uint16_t baudrate)
 {
-    uint16_t n;
-    n = (uint16_t)((((uint32_t)_XTAL_FREQ / baudrate) >> 2) - 1);
+    uint8_t data = RCREG;
+    uint16_t n = (uint16_t)(((_XTAL_FREQ / baudrate) >> 2) - 1);
     TXSTA = 0;
     RCSTA = 0;
     BAUDCTL = 0;
+    
     // Set baudrate
     BAUDCTLbits.BRG16 = 1;
     SPBRGH = (uint8_t)(n >> 8);
@@ -23,8 +24,8 @@ void uart_open(uint16_t baudrate)
     RCSTAbits.CREN = 1;
     RCSTAbits.SPEN = 1;
 
-    TRISCbits.TRISC6 = 0;
-    TRISCbits.TRISC7 = 1;
+    //TRISCbits.TRISC6 = 0;
+    //TRISCbits.TRISC7 = 1;
 }
 
 void uart_write_byte(uint8_t data)
@@ -35,15 +36,14 @@ void uart_write_byte(uint8_t data)
 
 void uart_write_frame(uint8_t *frame, uint8_t len)
 {
-    while(len)
+    uint8_t i = 0;
+    for(i = 0; i < len; i++)
     {
-        uart_write_byte(*frame);
-        frame++;
-        len--;
+        uart_write_byte(frame[i]);
     }
 }
 
-void uart_disable(uint8_t disable)
+void uart_disable(bool disable)
 {
     if(disable)
     {

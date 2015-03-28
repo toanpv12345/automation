@@ -11,7 +11,7 @@
 #include <stdint.h>
 
 #ifndef _XTAL_FREQ
-#define _XTAL_FREQ  12000000
+#define _XTAL_FREQ  16000000
 #endif
 
 #define delay_ms(ms)    __delay_ms(ms)
