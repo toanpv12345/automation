@@ -74,6 +74,15 @@
 #define CMD_ALL_RELAY_ON    0x34
 #define CMD_ALL_RELAY_OFF   0x35
 
+#define RELAY_ID1   0x30
+#define RELAY_ID2   0x31
+#define RELAY_ID3   0x32
+#define RELAY_ID4   0x33
+#define RELAY_ID5   0x34
+#define RELAY_ID6   0x35
+#define RELAY_ID7   0x36
+#define RELAY_ID8   0x37
+
 // ID address
 #define ID_ADDR     0x03
 
@@ -118,83 +127,131 @@ void main(int argc, char** argv)
                 crc = buffer[START] | buffer[CMD] | buffer[DEVICE_ID] | buffer[DATA];
                 if(crc == buffer[CRC])
                 {
-                    if(buffer[CMD] == CMD_RELAY_ON)
+                    switch(buffer[CMD])
                     {
-                        if(buffer[DEVICE_ID] == device_id)
+                        case CMD_RELAY_ON:
                         {
-                            if(buffer[DATA] == 0x30)
-                                RELAY1 = 1;
-                            else if(buffer[DATA] == 0x31)
-                                RELAY2 = 1;
-                            else if(buffer[DATA] == 0x32)
-                                RELAY3 = 1;
-                            else if(buffer[DATA] == 0x33)
-                                RELAY4 = 1;
-                            else if(buffer[DATA] == 0x34)
-                                RELAY5 = 1;
-                            else if(buffer[DATA] == 0x35)
-                                RELAY6 = 1;
-                            else if(buffer[DATA] == 0x36)
-                                RELAY7 = 1;
-                            else if(buffer[DATA] == 0x37)
-                                RELAY8 = 1;
+                            if(buffer[DEVICE_ID] == device_id)
+                            {
+                                switch(buffer[DATA])
+                                {
+                                    case RELAY_ID1:
+                                    RELAY1 = 1;
+                                    break;
 
-                            uart_write_frame(buffer, BUFFER_LENGTH);
-                        }
-                    }
-                    else if(buffer[CMD] == CMD_RELAY_OFF)
-                    {
-                        if(buffer[DEVICE_ID] == device_id)
-                        {
-                            if(buffer[DATA] == 0x30)
-                                RELAY1 = 0;
-                            else if(buffer[DATA] == 0x31)
-                                RELAY2 = 0;
-                            else if(buffer[DATA] == 0x32)
-                                RELAY3 = 0;
-                            else if(buffer[DATA] == 0x33)
-                                RELAY4 = 0;
-                            else if(buffer[DATA] == 0x34)
-                                RELAY5 = 0;
-                            else if(buffer[DATA] == 0x35)
-                                RELAY6 = 0;
-                            else if(buffer[DATA] == 0x36)
-                                RELAY7 = 0;
-                            else if(buffer[DATA] == 0x37)
-                                RELAY8 = 0;
+                                    case RELAY_ID2:
+                                    RELAY2 = 1;
+                                    break;
 
-                            uart_write_frame(buffer, BUFFER_LENGTH);
+                                    case RELAY_ID3:
+                                    RELAY3 = 1;
+                                    break;
+
+                                    case RELAY_ID4:
+                                    RELAY4 = 1;
+                                    break;
+
+                                    case RELAY_ID5:
+                                    RELAY5 = 1;
+                                    break;
+
+                                    case RELAY_ID6:
+                                    RELAY6 = 1;
+                                    break;
+
+                                    case RELAY_ID7:
+                                    RELAY7 = 1;
+                                    break;
+                                    
+                                    case RELAY_ID8:
+                                    RELAY8 = 1;
+                                    break;
+                                }
+                                uart_write_frame(buffer, BUFFER_LENGTH);
+                            }
                         }
-                    }
-                    else if(buffer[CMD] == CMD_ALL_RELAY_OFF)
-                    {
-                        if(buffer[DEVICE_ID] == device_id)
+                        break;
+                        
+                        case CMD_RELAY_OFF:
                         {
-                            RELAY_DATA = 0x00;
-                            uart_write_frame(buffer, BUFFER_LENGTH);
+                            if(buffer[DEVICE_ID] == device_id)
+                            {
+                                switch(buffer[DATA])
+                                {
+                                    case RELAY_ID1:
+                                    RELAY1 = 0;
+                                    break;
+
+                                    case RELAY_ID2:
+                                    RELAY2 = 0;
+                                    break;
+
+                                    case RELAY_ID3:
+                                    RELAY3 = 0;
+                                    break;
+
+                                    case RELAY_ID4:
+                                    RELAY4 = 0;
+                                    break;
+
+                                    case RELAY_ID5:
+                                    RELAY5 = 0;
+                                    break;
+
+                                    case RELAY_ID6:
+                                    RELAY6 = 0;
+                                    break;
+
+                                    case RELAY_ID7:
+                                    RELAY7 = 0;
+                                    break;
+
+                                    case RELAY_ID8:
+                                    RELAY8 = 0;
+                                    break;
+                                }
+                                uart_write_frame(buffer, BUFFER_LENGTH);
+                            }
                         }
-                    }
-                    else if(buffer[CMD] == CMD_ALL_RELAY_ON)
-                    {
-                        if(buffer[DEVICE_ID] == device_id)
+                        break;
+                        
+                        case CMD_ALL_RELAY_OFF:
                         {
-                            RELAY_DATA = 0xFF;
+                            if(buffer[DEVICE_ID] == device_id)
+                            {
+                                RELAY_DATA = 0x00;
+                                uart_write_frame(buffer, BUFFER_LENGTH);
+                            }
+                        }
+                        break;
+                        
+                        case CMD_ALL_RELAY_ON:
+                        {
+                            if(buffer[DEVICE_ID] == device_id)
+                            {
+                                RELAY_DATA = 0xFF;
+                                uart_write_frame(buffer, BUFFER_LENGTH);
+                            }
+                        }
+                        break;
+                        
+                        case CMD_GET_ID:
+                        {
+                            device_id = EEPROM_read(ID_ADDR);
+                            buffer[DEVICE_ID] = device_id;
+                            buffer[DATA] = device_id;
                             uart_write_frame(buffer, BUFFER_LENGTH);
                         }
-                    }
-                    else if(buffer[CMD] == CMD_GET_ID)
-                    {
-                        device_id = EEPROM_read(ID_ADDR);
-                        buffer[DEVICE_ID] = device_id;
-                        buffer[DATA] = device_id;
-                        uart_write_frame(buffer, BUFFER_LENGTH);
-                    }
-                    else if(buffer[CMD] == CMD_SET_ID)
-                    {
-                        EEPROM_write(ID_ADDR, buffer[DATA]);
-                        device_id = buffer[DATA];
-                        buffer[DEVICE_ID] = device_id;
-                        uart_write_frame(buffer, BUFFER_LENGTH);
+                        break;
+
+                        case CMD_SET_ID:
+                        {
+                            EEPROM_write(ID_ADDR, buffer[DATA]);
+                            device_id = buffer[DATA];
+                            buffer[DEVICE_ID] = device_id;
+                            uart_write_frame(buffer, BUFFER_LENGTH);
+                        }
+                        break;
                     }
                 }
             }

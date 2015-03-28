@@ -1,9 +1,9 @@
-___aldiv: CODE, 1541 0 143
-_uart_write_frame: CODE, 1393 0 24
-_EEPROM_read: CODE, 1380 0 13
-_EEPROM_write: CODE, 1417 0 38
-_main: CODE, 1684 0 354
+___aldiv: CODE, 1549 0 143
+_uart_write_frame: CODE, 1401 0 24
+_EEPROM_read: CODE, 1388 0 13
+_EEPROM_write: CODE, 1425 0 38
+_main: CODE, 1692 0 346
 __initialization: CODE, 2038 0 6
-_uart_write_byte: CODE, 1370 0 10
-_uart_open: CODE, 1455 0 86
-Total: 674
+_uart_write_byte: CODE, 1378 0 10
+_uart_open: CODE, 1463 0 86
+Total: 666
